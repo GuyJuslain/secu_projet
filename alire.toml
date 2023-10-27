@@ -1,0 +1,9 @@
+name = "secu_projet"
+description = "Shiny new project"
+version = "0.1.0-dev"
+
+authors = ["Guy Juslain"]
+maintainers = ["Guy Juslain <guyjuslain@gmail.com>"]
+maintainers-logins = ["guyjuslain"]
+
+executables = ["secu_projet"]
