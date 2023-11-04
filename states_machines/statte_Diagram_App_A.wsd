@@ -1,0 +1,28 @@
+@startuml App_A or App_B
+
+    [*] --> Ecoute
+
+    Ecoute --> Decrypte : Msg_recu /= "" ET cle_B /= 0 
+    Ecoute --> Connecte
+
+    Ecoute -> Deconnecte : Demande_Deconnect = True
+
+    Ecoute --> Encrypte : Msg_send /= ""
+
+    Transmet -> Ecoute
+
+    Deconnecte -> Ecoute
+
+    Connecte -> Ecoute
+
+    Encrypte --> Transmet
+
+    Decrypte --> Ecoute
+
+    Connecte : Conn_Active := True
+    Deconnecte : Conn_Active := False
+    Decrypte : Puts(Msg_recu)
+    Decrypte : Msg_recu := ""
+    Encrypte : Msg_send := msg_Encrypted
+
+@enduml
