@@ -1,10 +1,11 @@
 
 with Ada.Text_IO;             use Ada.Text_IO;
 with GNAT.Sockets;            use GNAT.Sockets;
-WITH Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+WITH Ada.Strings.Unbounded;   use Ada.Strings.Unbounded;
 
+-- Streams pour les flux
 with Ada.Streams;   use Ada.Streams;
-use type Ada.Streams.Stream_Element_Count;
+use type Ada.Streams.Stream_Element_Count;   
 
 procedure client is
    Client  : Socket_Type;
@@ -12,9 +13,9 @@ procedure client is
    Channel : Stream_Access; 
    Message : Unbounded_String := To_Unbounded_String("");
 
-   Send   : String := (1 => ASCII.CR, 2 => ASCII.LF, 3 => ASCII.CR, 4 => ASCII.LF);
-   Offset : Ada.Streams.Stream_Element_Count;
-   Data   : Ada.Streams.Stream_Element_Array (1 .. 256);
+ --  Send   : String := (1 => ASCII.CR, 2 => ASCII.LF, 3 => ASCII.CR, 4 => ASCII.LF);
+ --  Offset : Ada.Streams.Stream_Element_Count;
+ --  Data   : Ada.Streams.Stream_Element_Array (1 .. 256);
    count : Integer := 0;
 
 begin
@@ -37,8 +38,9 @@ begin
       exit when count = 5;
       delay 0.5;
       put("Saisisez votre message :  ");
-      Message := To_Unbounded_String(Get_Line);
-      String'Write (Channel, To_String(Message)  & Send);
+      Message := To_Unbounded_String(Get_Line) & ASCII.LF;  -- On ecrit le message et on lui ajoute un caractère de fin de ligne
+      String'Write (Channel, To_String(Message));   
       count := count + 1;
-   end loop;
+   end loop;   
+ --  String'Write (Channel, ASCII.NUL'Image);   
 end client;
